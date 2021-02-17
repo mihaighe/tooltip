@@ -1,0 +1,90 @@
+html,
+body {
+  margin: 0;
+}
+
+.full-screen-video-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+video {
+  z-index: -1;
+  position: absolute;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.full-screen-video-content {
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  grid-gap: 20px;
+  position: relative;
+}
+
+img {
+  padding: 3px;
+  background-color: white;
+  width: 200px;
+  height: 290px;
+}
+
+.cover-container {
+  position: relative;
+}
+
+.cover::before,
+.cover::after {
+  --scale: 0;
+  --arrow-size: 10px;
+  font-size: 18px;
+
+
+  position: absolute;
+  left: 50%;
+  top: -15px;
+  transition: 150ms transform;
+  transform-origin: bottom;
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
+}
+
+/* animation */
+.cover:hover::before,
+.cover:hover::after {
+  --scale: 1;
+}
+
+/* main tooltip  */
+.cover::before {
+  --translate-y: -100%;
+  box-shadow: 3px 0px 5px white;
+
+  content: attr(data-tooltip);
+  background: white;
+  width: max-content;
+  max-width: 100%;
+
+  color: black;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* arrow tooltip */
+.cover::after {
+  content: "";
+  border: var(--arrow-size) solid transparent;
+  border-top-color: white;
+  transform-origin: top;
+}
